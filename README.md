@@ -1,2 +1,2 @@
-# ios-app-test
-Development of a nutrition app
+# Nutrition App
+Development of a nutrition app for iOS
