@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var Header: UILabel!
     @IBOutlet weak var totalCarb: UILabel!
     @IBOutlet weak var totalFat: UILabel!
+    @IBOutlet weak var totalCalories: UILabel!
     @IBOutlet weak var totalProtein: UILabel!
     @IBOutlet weak var roundedCornerButton: UIButton!
     
@@ -28,52 +29,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "addFoodPop", sender: self)
     }
     
-    // not working
-    func getCurrentProteins() -> Int {
-        return Int(totalProtein.text!)!
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let addFood = segue.destination as! addFoodPop
+        addFood.currentCarbs = Int(totalCarb.text!)!
+        addFood.currentProtein = Int(totalProtein.text!)!
+        addFood.currentFats = Int(totalFat.text!)!
     }
-    
-    func getCurrentCarbohydrates() -> Int {
-        return Int(totalCarb.text!)!
-    }
-    
-    func getCurrentFats() -> Int {
-        return Int(totalFat.text!)!
-    }
-    
-    func checkTotals() {
-        //var curCarbs, curFats, curProt: Int
-        if totalCarb.text! == "0" && totalProtein.text! == "0" && totalFat.text! == "0" {
-            //CHECK IF USER ADDS NEW FOOD
-            totalProtein.text = String(prot)
-            totalCarb.text = String(carbs)
-            totalFat.text = String(fats)
-        } else {
-            /*
-            curCarbs = getCurrentCarbohydrates()
-            curFats = getCurrentFats()
-            curProt = getCurrentProteins()
-            
-            curCarbs += carbs
-            curProt += prot
-            curFats += fats
-            
-            totalProtein.text = String(curProt)
-            totalCarb.text = String(curCarbs)
-            totalFat.text = String(curFats)
-             */
-        }
-    }
-    
+
     override func viewDidAppear(_ animated: Bool) {
-        totalProtein.text = String(prot)
-        totalCarb.text = String(carbs)
-        totalFat.text = String(fats)
+        totalCarb.text = "\(carbs)"
+        totalProtein.text = "\(prot)"
+        totalFat.text = "\(fats)"
+        totalCalories.text = String((9 * fats) + (4 * carbs) + (4 * prot))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checkTotals()
     }
     
 }

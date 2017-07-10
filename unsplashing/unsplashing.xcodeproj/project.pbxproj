@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A61DCEBF1F0F40D30072E5C9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61DCEBE1F0F40D30072E5C9 /* ViewController.swift */; };
 		A675B9401F01F99600AD9219 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675B93F1F01F99600AD9219 /* AppDelegate.swift */; };
-		A675B9421F01F99600AD9219 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675B9411F01F99600AD9219 /* ViewController.swift */; };
 		A675B9451F01F99600AD9219 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A675B9431F01F99600AD9219 /* Main.storyboard */; };
 		A675B9471F01F99600AD9219 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A675B9461F01F99600AD9219 /* Assets.xcassets */; };
 		A675B94A1F01F99600AD9219 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A675B9481F01F99600AD9219 /* LaunchScreen.storyboard */; };
@@ -35,9 +35,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A61DCEBE1F0F40D30072E5C9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A675B93C1F01F99600AD9219 /* unsplashing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = unsplashing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A675B93F1F01F99600AD9219 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A675B9411F01F99600AD9219 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A675B9441F01F99600AD9219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A675B9461F01F99600AD9219 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A675B9491F01F99600AD9219 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -99,9 +99,9 @@
 		A675B93E1F01F99600AD9219 /* unsplashing */ = {
 			isa = PBXGroup;
 			children = (
+				A61DCEBE1F0F40D30072E5C9 /* ViewController.swift */,
 				A675B96D1F048F4300AD9219 /* addFoodPop.swift */,
 				A675B93F1F01F99600AD9219 /* AppDelegate.swift */,
-				A675B9411F01F99600AD9219 /* ViewController.swift */,
 				A675B9431F01F99600AD9219 /* Main.storyboard */,
 				A675B9461F01F99600AD9219 /* Assets.xcassets */,
 				A675B9481F01F99600AD9219 /* LaunchScreen.storyboard */,
@@ -196,6 +196,7 @@
 				TargetAttributes = {
 					A675B93B1F01F99500AD9219 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 82Y7XLZ8VX;
 						ProvisioningStyle = Automatic;
 					};
 					A675B94F1F01F99600AD9219 = {
@@ -262,7 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A675B9421F01F99600AD9219 /* ViewController.swift in Sources */,
+				A61DCEBF1F0F40D30072E5C9 /* ViewController.swift in Sources */,
 				A675B96E1F048F4300AD9219 /* addFoodPop.swift in Sources */,
 				A675B9401F01F99600AD9219 /* AppDelegate.swift in Sources */,
 			);
@@ -416,6 +417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 82Y7XLZ8VX;
 				INFOPLIST_FILE = unsplashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NC.unsplashing;
@@ -428,6 +430,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 82Y7XLZ8VX;
 				INFOPLIST_FILE = unsplashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NC.unsplashing;
@@ -509,6 +512,7 @@
 				A675B9661F01F99600AD9219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A675B9671F01F99600AD9219 /* Build configuration list for PBXNativeTarget "unsplashingTests" */ = {
 			isa = XCConfigurationList;
@@ -517,6 +521,7 @@
 				A675B9691F01F99600AD9219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A675B96A1F01F99600AD9219 /* Build configuration list for PBXNativeTarget "unsplashingUITests" */ = {
 			isa = XCConfigurationList;
@@ -525,6 +530,7 @@
 				A675B96C1F01F99600AD9219 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
