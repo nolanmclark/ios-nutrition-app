@@ -8,3 +8,5 @@ TODO:
 - Integrate Health Kit into multiple areas of application
 - Ability to store recent foods into user memory
 - Innovative goal keeping, use Apple Watch daily goals?
+- Work on application work flow
+- Profile data creation and storage
