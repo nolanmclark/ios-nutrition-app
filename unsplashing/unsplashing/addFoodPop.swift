@@ -16,6 +16,8 @@ class addFoodPop: UIViewController {
     
     var delegate: ViewControllerDelegate? = nil
     
+    @IBOutlet weak var mealLabel: UILabel!
+    @IBOutlet weak var mealName: UITextField!
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var proteinText: UITextField!
     @IBOutlet weak var carbLabel: UILabel!
@@ -23,14 +25,49 @@ class addFoodPop: UIViewController {
     @IBOutlet weak var fatLabel: UILabel!
     @IBOutlet weak var fatText: UITextField!
     
+    @IBOutlet weak var gradBack: UIView!
+    @IBOutlet weak var gradButton: UIButton!
     var currentProtein = Int()
     var currentCarbs = Int()
     var currentFats = Int()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Add New Food"
+        self.title = "Add Meal"
         // Do any additional setup after loading the view.
+        let gradientLayer = CAGradientLayer.init()
+        fatText.keyboardType = UIKeyboardType.numberPad
+        carbText.keyboardType = UIKeyboardType.numberPad
+        proteinText.keyboardType = UIKeyboardType.numberPad
+        mealName.keyboardType = UIKeyboardType.alphabet
+        
+        gradientLayer.colors = [UIColor.white.cgColor,
+                                UIColor.red.cgColor,
+                                UIColor.white.cgColor]
+        
+        gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 2)
+        gradientLayer.frame = CGRect.init(
+            x: gradButton.frame.minX - 40,
+            y: gradButton.frame.minY - 40,
+            width: gradButton.frame.width + 80,
+            height: gradButton.frame.height + 80
+        )
+        gradientLayer.masksToBounds = true
+        let shadowLayer = CALayer.init()
+        shadowLayer.frame = gradientLayer.bounds
+        shadowLayer.shadowColor = UIColor.black.cgColor
+        shadowLayer.shadowOpacity = 0.06
+        shadowLayer.shadowRadius = 40
+        shadowLayer.shadowPath = CGPath.init(rect: shadowLayer.bounds, transform: nil)
+        gradientLayer.mask = shadowLayer
+        gradBack.layer.insertSublayer(gradientLayer, below: gradButton.layer)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if(mealName.text != "") {
+            mealName.text = "";
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,31 +81,12 @@ class addFoodPop: UIViewController {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
-    {
-        let allowedCharacters = CharacterSet.decimalDigits
-        let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet)
-    }
-    
     func textFieldDidEndEditing(_ textField: UITextField) {
         proteinText.text = textField.text
         carbText.text = textField.text
         fatText.text = textField.text
+        mealName.text = textField.text
     }
-    
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let svc = segue.destination as! UINavigationController
-        let todayStats: ViewController = svc.topViewController as! ViewController
-        // Validate input, if form valid add to current data.
-        if carbText.text != "" && proteinText.text != "" && fatText.text != "" {
-            todayStats.carbs = currentCarbs + Int(carbText.text!)!
-            todayStats.prot = currentProtein + Int(proteinText.text!)!
-            todayStats.fats = currentFats + Int(fatText.text!)!
-        } else {
-            createAlert(title: "Invalid Submission", message: "Fill out all elements of form")
-        }
-    }*/
     
     func createAlert (title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -80,12 +98,15 @@ class addFoodPop: UIViewController {
     
     //MARK: Actions
     @IBAction func addFoodItem(sender: UIButton) {
+        
             let todayStats = self.navigationController?.viewControllers[0] as! ViewController
-            if carbText.text != "" && proteinText.text != "" && fatText.text != "" {
+            if carbText.text != "" && proteinText.text != "" && fatText.text != "" && mealName.text != ""
+            {
                 // NEED TO CHECK FOR letters/numeric
                 todayStats.carbs = currentCarbs + Int(carbText.text!)!
                 todayStats.prot = currentProtein + Int(proteinText.text!)!
                 todayStats.fats = currentFats + Int(fatText.text!)!
+                todayStats.mealName = String(mealName.text!)!
                 self.navigationController?.popViewController(animated: true)
             } else {
                 createAlert(title: "Invalid Submission", message: "Fill out all elements of form")
