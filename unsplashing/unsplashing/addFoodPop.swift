@@ -115,7 +115,13 @@ class addFoodPop: UIViewController {
             let todayStats = self.navigationController?.viewControllers[0] as! TodayStatsViewController
             if carbText.text != "" && proteinText.text != "" && fatText.text != "" && mealName.text != ""
             {
-                // NEED TO CHECK FOR letters/numeric
+                todayStats.mealCarbs = carbText.text!;
+                todayStats.mealProtein = proteinText.text!;
+                todayStats.mealFats = fatText.text!;
+                
+                
+                
+                // TODO: NEED TO CHECK FOR letters/numeric
                 todayStats.carbs = currentCarbs + Int(carbText.text!)!
                 todayStats.prot = currentProtein + Int(proteinText.text!)!
                 todayStats.fats = currentFats + Int(fatText.text!)!

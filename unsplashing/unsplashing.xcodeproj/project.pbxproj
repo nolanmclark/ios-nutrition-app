@@ -18,6 +18,8 @@
 		A675B9601F01F99600AD9219 /* unsplashingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675B95F1F01F99600AD9219 /* unsplashingUITests.swift */; };
 		A675B96E1F048F4300AD9219 /* addFoodPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = A675B96D1F048F4300AD9219 /* addFoodPop.swift */; };
 		A6DE104A20D34C4600110661 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE104920D34C4600110661 /* Meal.swift */; };
+		A6DE105220D3530900110661 /* MealDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE105120D3530900110661 /* MealDetailViewController.swift */; };
+		A6DE105620D35D3400110661 /* MealViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6DE105520D35D3400110661 /* MealViewCell.swift */; };
 		BA14CE397F95D56918CA02B3 /* Pods_unsplashing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90047D9EBB014D7B4E50AE9E /* Pods_unsplashing.framework */; };
 		F9DB562D4695F398F2A1EC0B /* Pods_unsplashingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8EF775E07306E66D4E7CBC /* Pods_unsplashingTests.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +63,9 @@
 		A675B9611F01F99600AD9219 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A675B96D1F048F4300AD9219 /* addFoodPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addFoodPop.swift; sourceTree = "<group>"; };
 		A6DE104920D34C4600110661 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		A6DE104B20D352C800110661 /* unsplashing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "unsplashing-Bridging-Header.h"; sourceTree = "<group>"; };
+		A6DE105120D3530900110661 /* MealDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealDetailViewController.swift; sourceTree = "<group>"; };
+		A6DE105520D35D3400110661 /* MealViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewCell.swift; sourceTree = "<group>"; };
 		B4EA2D46C89A9C96C5538912 /* Pods-unsplashingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-unsplashingTests/Pods-unsplashingTests.release.xcconfig"; sourceTree = "<group>"; };
 		DFA07AAF36C8F9ABC504ED1E /* Pods-unsplashing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-unsplashing/Pods-unsplashing.debug.xcconfig"; sourceTree = "<group>"; };
 		E815003D8EF62ABD9B4D9CA9 /* Pods-unsplashing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-unsplashing.release.xcconfig"; path = "Pods/Target Support Files/Pods-unsplashing/Pods-unsplashing.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +157,9 @@
 				A675B9461F01F99600AD9219 /* Assets.xcassets */,
 				A675B9481F01F99600AD9219 /* LaunchScreen.storyboard */,
 				A675B94B1F01F99600AD9219 /* Info.plist */,
+				A6DE104B20D352C800110661 /* unsplashing-Bridging-Header.h */,
+				A6DE105120D3530900110661 /* MealDetailViewController.swift */,
+				A6DE105520D35D3400110661 /* MealViewCell.swift */,
 			);
 			path = unsplashing;
 			sourceTree = "<group>";
@@ -419,7 +427,9 @@
 				A6DE104A20D34C4600110661 /* Meal.swift in Sources */,
 				A61DCEBF1F0F40D30072E5C9 /* TodayStatsViewController.swift in Sources */,
 				A675B96E1F048F4300AD9219 /* addFoodPop.swift in Sources */,
+				A6DE105220D3530900110661 /* MealDetailViewController.swift in Sources */,
 				A675B9401F01F99600AD9219 /* AppDelegate.swift in Sources */,
+				A6DE105620D35D3400110661 /* MealViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,11 +582,14 @@
 			baseConfigurationReference = DFA07AAF36C8F9ABC504ED1E /* Pods-unsplashing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 82Y7XLZ8VX;
 				INFOPLIST_FILE = unsplashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NC.unsplashing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "unsplashing/unsplashing-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
 			};
@@ -587,11 +600,13 @@
 			baseConfigurationReference = E815003D8EF62ABD9B4D9CA9 /* Pods-unsplashing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 82Y7XLZ8VX;
 				INFOPLIST_FILE = unsplashing/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = NC.unsplashing;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "unsplashing/unsplashing-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.2;
 			};

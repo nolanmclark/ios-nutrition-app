@@ -22,6 +22,11 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
     @IBOutlet weak var roundedCornerButton: UIButton!
     @IBOutlet weak var mealDetailsTable: UITableView!
     
+    
+    var mealCarbs = String()
+    var mealProtein = String()
+    var mealFats =  String()
+    
     var carbs = Int()
     var prot = Int()
     var fats = Int()
@@ -29,16 +34,35 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
 
     var timestamp = DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .none)
     
-    var list = [String]();
+    var meals = [Meal]();
     
-    public func tableView(_ mealDetailsTable: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return(list.count);
+    func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
     }
     
-    public func tableView(_ mealDetailsTable: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
-        cell.textLabel?.text = list[indexPath.row]
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return meals.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Meal Cell", for: indexPath) as! MealViewCell
+        let meal = self.meals[indexPath.row]
+        cell.mealData = meal
+        cell.mealName.text = meal.mealName
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedMeal = self.meals[indexPath.row]
+        let Storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let mealVC = Storyboard.instantiateViewController(withIdentifier: "MealDetailViewController") as! MealDetailViewController
+        mealVC.meal = selectedMeal
+        
+        self.navigationController?.pushViewController(mealVC, animated: true);
     }
 
     @IBAction func showPopover(_ sender: UIButton) {
@@ -46,19 +70,20 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let addFood = segue.destination as! addFoodPop
-        addFood.currentCarbs = Int(totalCarb.text!)!
-        addFood.currentProtein = Int(totalProtein.text!)!
-        addFood.currentFats = Int(totalFat.text!)!
+        if segue.identifier == "addFoodPop" {
+            let addFood = segue.destination as! addFoodPop
+            addFood.currentCarbs = Int(totalCarb.text!)!
+            addFood.currentProtein = Int(totalProtein.text!)!
+            addFood.currentFats = Int(totalFat.text!)!
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         if(mealName != "") {
-            let mealDetails = ["\(mealName)", "\(carbs)", "\(prot)", "\(fats)"]
-            UserDefaults.standard.set(mealDetails, forKey: "today")
-            self.list.append(String(mealName))
+            let mealDetails = Meal(mealName: mealName, protein: mealProtein, carbs: mealCarbs, fat: mealFats)
+            self.meals.append(mealDetails)
             self.mealDetailsTable.beginUpdates()
-            self.mealDetailsTable.insertRows(at: [IndexPath(row: self.list.count-1, section: 0)], with: .automatic)
+            self.mealDetailsTable.insertRows(at: [IndexPath(row: self.meals.count-1, section: 0)], with: .automatic)
             self.mealDetailsTable.endUpdates()
         }
         mealName = ""
@@ -78,7 +103,6 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Today - \(self.timestamp)"
-        
     }
     
 }
