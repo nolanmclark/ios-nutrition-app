@@ -11,7 +11,7 @@
 import UIKit
 
 
-class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     //MARK: Properties
     @IBOutlet weak var Header: UILabel!
@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     }
     
     public func tableView(_ mealDetailsTable: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "cell")
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "cell")
         cell.textLabel?.text = list[indexPath.row]
         return cell
     }
@@ -54,11 +54,14 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
 
     override func viewDidAppear(_ animated: Bool) {
         if(mealName != "") {
+            let mealDetails = ["\(mealName)", "\(carbs)", "\(prot)", "\(fats)"]
+            UserDefaults.standard.set(mealDetails, forKey: "today")
             self.list.append(String(mealName))
             self.mealDetailsTable.beginUpdates()
             self.mealDetailsTable.insertRows(at: [IndexPath(row: self.list.count-1, section: 0)], with: .automatic)
             self.mealDetailsTable.endUpdates()
         }
+        mealName = ""
         totalCarb.text = "\(carbs)"
         totalProtein.text = "\(prot)"
         totalFat.text = "\(fats)"
@@ -75,6 +78,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Today - \(self.timestamp)"
+        
     }
     
 }

@@ -35,6 +35,12 @@ class addFoodPop: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Add Meal"
+        
+        mealName.text = ""
+        proteinText.text = ""
+        carbText.text = ""
+        fatText.text = ""
+        
         // Do any additional setup after loading the view.
         let gradientLayer = CAGradientLayer.init()
         fatText.keyboardType = UIKeyboardType.numberPad
@@ -62,6 +68,13 @@ class addFoodPop: UIViewController {
         shadowLayer.shadowPath = CGPath.init(rect: shadowLayer.bounds, transform: nil)
         gradientLayer.mask = shadowLayer
         gradBack.layer.insertSublayer(gradientLayer, below: gradButton.layer)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addFoodPop.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -89,8 +102,8 @@ class addFoodPop: UIViewController {
     }
     
     func createAlert (title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { (action) in
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { (action) in
                 alert.dismiss(animated: true, completion: nil)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -99,14 +112,14 @@ class addFoodPop: UIViewController {
     //MARK: Actions
     @IBAction func addFoodItem(sender: UIButton) {
         
-            let todayStats = self.navigationController?.viewControllers[0] as! ViewController
+            let todayStats = self.navigationController?.viewControllers[0] as! TodayStatsViewController
             if carbText.text != "" && proteinText.text != "" && fatText.text != "" && mealName.text != ""
             {
                 // NEED TO CHECK FOR letters/numeric
                 todayStats.carbs = currentCarbs + Int(carbText.text!)!
                 todayStats.prot = currentProtein + Int(proteinText.text!)!
                 todayStats.fats = currentFats + Int(fatText.text!)!
-                todayStats.mealName = String(mealName.text!)!
+                todayStats.mealName = (mealName.text)!
                 self.navigationController?.popViewController(animated: true)
             } else {
                 createAlert(title: "Invalid Submission", message: "Fill out all elements of form")
