@@ -13,4 +13,5 @@ struct Meal {
     var protein: String!
     var carbs: String!
     var fat: String!
+    var calories: String!
 }

@@ -14,6 +14,7 @@ class MealDetailViewController: UIViewController {
     @IBOutlet weak var fats: UILabel!
     @IBOutlet weak var protein: UILabel!
     @IBOutlet weak var carbs: UILabel!
+    @IBOutlet weak var totalMealCalories: UILabel!
     
     var meal: Meal?
 
@@ -24,6 +25,7 @@ class MealDetailViewController: UIViewController {
         fats.text = meal?.fat
         protein.text = meal?.protein
         carbs.text = meal?.carbs
+        totalMealCalories.text = meal?.calories
     }
     
 

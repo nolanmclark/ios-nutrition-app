@@ -26,6 +26,7 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
     var mealCarbs = String()
     var mealProtein = String()
     var mealFats =  String()
+    var mealCalories = String()
     
     var carbs = Int()
     var prot = Int()
@@ -64,6 +65,19 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
         
         self.navigationController?.pushViewController(mealVC, animated: true);
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCell.EditingStyle.delete) {
+            self.meals.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            // TODO: Remove amount of macros/cals from total
+        }
+    }
 
     @IBAction func showPopover(_ sender: UIButton) {
         performSegue(withIdentifier: "addFoodPop", sender: self)
@@ -78,14 +92,26 @@ class TodayStatsViewController: UIViewController, UITextFieldDelegate, UITableVi
         }
     }
 
+
     override func viewDidAppear(_ animated: Bool) {
         if(mealName != "") {
-            let mealDetails = Meal(mealName: mealName, protein: mealProtein, carbs: mealCarbs, fat: mealFats)
+            var mealFatCals: Int = 0
+            var mealCarbCals: Int = 0
+            var mealProtCals: Int = 0
+            var mealTotalCalories: String = ""
+            
+            mealFatCals = 9 * (Int(mealFats))!
+            mealCarbCals = 4 * (Int(mealCarbs))!
+            mealProtCals = 4 * (Int(mealProtein))!
+            mealTotalCalories = String(mealFatCals + mealCarbCals + mealProtCals)
+
+            let mealDetails = Meal(mealName: mealName, protein: mealProtein, carbs: mealCarbs, fat: mealFats, calories: mealTotalCalories)
             self.meals.append(mealDetails)
             self.mealDetailsTable.beginUpdates()
             self.mealDetailsTable.insertRows(at: [IndexPath(row: self.meals.count-1, section: 0)], with: .automatic)
             self.mealDetailsTable.endUpdates()
         }
+        
         mealName = ""
         totalCarb.text = "\(carbs)"
         totalProtein.text = "\(prot)"
